@@ -18,14 +18,14 @@ def read(path=fpaths.alabama_path):
     df = pd.concat([df, pd.read_csv(path + File02.file02 + ".ur1",
                                     header=None,
                                     names=File02.headers,
-                                    usecols=[6, 7, 8, 9, 10])],
+                                    usecols=[5, 6, 7, 8, 9])],
                    axis=1, sort=False)
     print("Reading File 03")
     df = pd.concat([df, pd.read_csv(path + File03.file03 + ".ur1",
                                     header=None,
                                     names=File03.headers,
-                                    usecols=[6, 7, 8, 9, 10, 11,
-                                             12, 13, 14, 15, 16, 17])],
+                                    usecols=[5, 6, 7, 8, 9, 10, 11,
+                                             12, 13, 14, 15, 16])],
                    axis=1, sort=False)
     # print(df.iloc[0:10, 0:5])
     # print("Reading File 04")
