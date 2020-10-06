@@ -1,24 +1,35 @@
 import census_df as cdf
+import folder_paths as fpaths
+import os
+
+from zipfile import ZipFile
 
 
 # Extract the zip file
-def extract_zip():
-    print("Extracting")
-
-
-# Convert the sf1 file to a text file
-def convert_sf1_to_txt():
-    print("Converting")
+def extract_zip(path=fpaths.alabama_path):
+    with ZipFile(path + ".zip", 'r') as zipObj:
+        zipObj.extractall(path)
 
 
 # To dataframe
-def to_dataframe():
-    print("To Dataframe")
-    cdf.read()
+def to_json(path=fpaths.alabama_path):
+    cdf.read(path)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    extract_zip()
-    convert_sf1_to_txt()
-    to_dataframe()
+    for state_path in fpaths.location_paths:
+        state_name = state_path.split("/")[1]
+
+        print("Processing", state_name)
+
+        if not os.path.isdir("./" + state_path):
+            print("Directory does not exist. Starting to extract")
+            extract_zip(state_path)
+            print("Directory is extracted")
+
+        print("Starting to create dataframe")
+
+        to_json(state_path)
+
+        print(state_name, "Processed")

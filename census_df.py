@@ -1,27 +1,30 @@
 # Meant for converting the data into a data from
 
 import pandas as pd
-import folder_paths as fpaths
+
 import File_Definitions.File01 as File01
 import File_Definitions.File02 as File02
 import File_Definitions.File03 as File03
 
 
-def read(path=fpaths.alabama_path):
+def read(path):
     state_name = path.split("/")[1]
+    state_abbr = path.split("/")[2][:2]
+
+    state_path = path + "/" + state_abbr
 
     print("Reading File 01")
-    df = pd.read_csv(path + File01.file01 + ".ur1",
+    df = pd.read_csv(state_path + File01.file01 + ".ur1",
                      header=None,
                      names=File01.headers)
     print("Reading File 02")
-    df = pd.concat([df, pd.read_csv(path + File02.file02 + ".ur1",
+    df = pd.concat([df, pd.read_csv(state_path + File02.file02 + ".ur1",
                                     header=None,
                                     names=File02.headers,
                                     usecols=[5, 6, 7, 8, 9])],
                    axis=1, sort=False)
     print("Reading File 03")
-    df = pd.concat([df, pd.read_csv(path + File03.file03 + ".ur1",
+    df = pd.concat([df, pd.read_csv(state_path + File03.file03 + ".ur1",
                                     header=None,
                                     names=File03.headers,
                                     usecols=[5, 6, 7, 8, 9, 10, 11,            # 7
@@ -45,11 +48,9 @@ def read(path=fpaths.alabama_path):
                                              114, 115, 116, 117, 118, 119,     # 115
                                              120, 121, 122, 123, 124, 125])],  # 121
                    axis=1, sort=False)
-    # print(df.iloc[0:10, 0:5])
-    # print("Reading File 04")
 
-    print("Writing Dataframe to JSON")
+    print("Starting to write JSON")
 
     df.to_json("State_JSONs/" + state_name + ".json", orient='records')
 
-    print("Finished writing Dataframe to JSON")
+    print("Finished writing JSON")
