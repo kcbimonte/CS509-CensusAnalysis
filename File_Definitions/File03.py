@@ -44,10 +44,30 @@ c033 = "Total_Races_Asian_Combo"  # P0060005 Total Asian alone or in Combo Talli
 c034 = "Total_Races_Hawaiian_Combo"  # P0060006 Total Hawaiian/Pacific alone or in Combo Tallied
 c035 = "Total_Races_Other_Combo"  # P0060007 Total Other Race alone or in Combo Tallied
 
+# Hispanic or Latino Origin by Race (Total Races Tallied)
+c036 = "Total_Hispanic_Races_Tallied"  # P0070001 Total Races Tallied
+c037 = "Total_Not_Hispanic_Races_Tallied"  # P0070002 Total Not Hispanic or Latino Tallied
+c038 = "Total_Not_Hispanic_Races_White_Tallied"  # P0070003 Total Not Hispanic or Latino White or in Combo Tallied
+c039 = "Total_Not_Hispanic_Races_Black_Tallied"  # P0070004 Total Not Hispanic or Latino Black/African American or in Combo Tallied
+c040 = "Total_Not_Hispanic_Races_Indian_Tallied"  # P0070005 Total Not Hispanic or Latino Indian/Alaska or in Combo Tallied
+c041 = "Total_Not_Hispanic_Races_Asian_Tallied"  # P0070006 Total Not Hispanic or Latino Asian or in Combo Tallied
+c042 = "Total_Not_Hispanic_Races_Hawaiian_Tallied"  # P0070007 Total Not Hispanic or Latino Hawaiian/Pacific or in Combo Tallied
+c043 = "Total_Not_Hispanic_Races_Other_Tallied"  # P0070008 Total Not Hispanic or Latino Other or in Combo Tallied
+c044 = "Total_Yes_Hispanic_Races_Tallied"  # p0070009 Total Hispanic or Latino Tallied
+c045 = "Total_Hispanic_Races_White_Tallied"  # P0070010 Total Hispanic or Latino White or in Combo Tallied
+c046 = "Total_Hispanic_Races_Black_Tallied"  # P0070011 Total Hispanic or Latino Black/African American or in Combo Tallied
+c047 = "Total_Hispanic_Races_Indian_Tallied"  # P0070012 Total Hispanic or Latino Indian/Alaska or in Combo Tallied
+c048 = "Total_Hispanic_Races_Asian_Tallied"  # P0070013 Total Hispanic or Latino Asian or in Combo Tallied
+c049 = "Total_Hispanic_Races_Hawaiian_Tallied"  # P0070014 Total Hispanic or Latino Hawaiian/Pacific or in Combo Tallied
+c050 = "Total_Hispanic_Races_Other_Tallied"  # P0070015 Total Hispanic or Latino Other or in Combo Tallied
+
 # Headers Definition
 headers = [c001, c002, c003, c004, c005, c006,
            c007, c008, c009, c010, c011, c012,
            c013, c014, c015, c016, c017, c018,
            c019, c020, c021, c022, c023, c024,
            c025, c026, c027, c028, c029, c030,
-           c031, c032, c033, c034, c035]
+           c031, c032, c033, c034, c035, c036,
+           c037, c038, c039, c040, c041, c042,
+           c043, c044, c045, c046, c047, c048,
+           c049, c050]
