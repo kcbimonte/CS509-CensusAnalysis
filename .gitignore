@@ -1,3 +1,4 @@
 /Census_Data
 .idea/
 /State_JSONs
+__pycache__/
