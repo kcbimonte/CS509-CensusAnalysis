@@ -2,3 +2,4 @@
 .idea/
 /State_JSONs
 __pycache__/
+venv/

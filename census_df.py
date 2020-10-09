@@ -2,7 +2,6 @@
 
 import pandas as pd
 
-import process_geo_headers as rgh
 import File_Definitions.File01 as File01
 import File_Definitions.File02 as File02
 import File_Definitions.File03 as File03
@@ -18,14 +17,6 @@ def read(path):
     df = pd.read_csv(state_path + File01.file01 + ".ur1",
                      header=None,
                      names=File01.headers)
-    # print("Reading GeoFile")
-    #
-    # geo_headers = rgh.createGeoHeaders()
-    #
-    # geo_info = rgh.read_geo_info(geo_headers, path)
-    #
-    # df = pd.concat([df, geo_info['ZCTA5']], axis=1, sort=False)
-    # print('Appended Zip Code')
     print("Reading File 02")
     df = pd.concat([df, pd.read_csv(state_path + File02.file02 + ".ur1",
                                     header=None,
