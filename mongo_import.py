@@ -1,13 +1,12 @@
 import json
 import os
+import mongo_info as dbinfo
 
 from pymongo import MongoClient
 
 
 def single_run(state_file="Alabama.json"):
-    myclient = MongoClient("mongodb://192.168.1.101:27017/",
-                           username='admin',
-                           password='legos11')
+    myclient = MongoClient(dbinfo.mongourl, username=dbinfo.username, password=dbinfo.password)
 
     db = myclient["census"]
 

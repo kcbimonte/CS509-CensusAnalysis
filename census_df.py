@@ -17,6 +17,11 @@ def read(path):
     df = pd.read_csv(state_path + File01.file01 + ".ur1",
                      header=None,
                      names=File01.headers)
+    print("Reading Geo Info")
+    df = pd.concat([df, pd.read_csv(state_path + "geo2010_processed.txt",
+                                    header=0,
+                                    usecols=[9, 10, 57])],
+                   axis=1, sort=False)
     print("Reading File 02")
     df = pd.concat([df, pd.read_csv(state_path + File02.file02 + ".ur1",
                                     header=None,
