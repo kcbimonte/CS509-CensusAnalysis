@@ -1,48 +1,48 @@
-import pandas as pd
 import json
-import mongo_info as dbinfo
+from os import path
 
-from pymongo import MongoClient
+import pandas as pd
 
-file_fips = "Census_Data/FIPS_ST_COU_Area-Name"
+file_fips = "Census_Data/fips-decoded.json"
+
+
+def _add_state_names(tempdf):
+    with open("Census_Data/state_fips.csv", 'r') as f:
+        df = pd.read_csv(f, header=None, names=['STATE', 'State Name'], dtype=str)
+
+    df = df.merge(tempdf, on=["STATE"])
+
+    df['State Name'] = df['State Name'].str.title()
+
+    df['Location'] = df['NAME'] + ', ' + df['State Name']
+
+    return df
 
 
 def read_file():
-    data = []
+    if not path.exists(file_fips):
+        with open("Census_Data/geojson-counties-fips.json", 'r') as f:
+            data = json.load(f)
 
-    f = open(file_fips + ".txt", 'r')
+        data = pd.DataFrame(data['features'])
 
-    for line in f:
-        line = line.strip('\n')
-        line = line.strip()
+        pd.set_option('display.max_columns', None)
 
-        if not len(line) < 7:
-            state = line[0:2]
-            county = line[3:6]
-            county_name = line[7:]
-            data.append([state, county, county_name])
+        df = pd.json_normalize(data['properties'])
 
-    df = pd.DataFrame(data, columns=["State_Code", "County_Code", "County_Name"])
+        tempdf = df.iloc[:, 1:4]
 
-    df.to_json(file_fips + ".json", orient='records')
+        tempdf['fips'] = tempdf['STATE'] + tempdf['COUNTY']
 
+        df = _add_state_names(tempdf)
 
-def upload_to_mongo():
-    myclient = MongoClient(dbinfo.mongourl, username=dbinfo.username, password=dbinfo.password)
+        df = df.sort_values(by=['fips'])
 
-    db = myclient["census"]
-
-    Collection = db['FIPS_Codes']
-
-    with open(file_fips + ".json") as file:
-        file_data = json.load(file)
-
-    if isinstance(file_data, list):
-        Collection.insert_many(file_data)
+        with open(file_fips, 'w') as f:
+            df.to_json(f, orient='records')
     else:
-        Collection.insert_one(file_data)
+        print('File exists')
 
 
 if __name__ == '__main__':
-    # read_file()
-    upload_to_mongo()
+    read_file()

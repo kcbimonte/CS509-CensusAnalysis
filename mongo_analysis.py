@@ -27,6 +27,13 @@ def percentage_hispanic():
                 df = df.append(temp_df, ignore_index=True)
                 print("Added", state_name)
 
+        with open("Census_Data/fips-decoded.json", 'r') as f:
+            df_fips = pd.read_json(f, orient='records', dtype=False)
+
+        df = df.merge(df_fips, on=["fips"])
+
+        df = df[['fips', 'Hispanic_Perc', 'Location']]
+
         with open("Census_Analysis/hispanic_perc.json", 'w') as file:
             df.to_json(file, orient='records')
     else:
@@ -36,7 +43,7 @@ def percentage_hispanic():
     with open("Census_Data/geojson-counties-fips.json", 'r') as fh:
         counties = json.load(fh)
 
-    fig = px.choropleth(df, geojson=counties, locations='fips', color='Hispanic_Perc',
+    fig = px.choropleth(df, geojson=counties, locations='fips', color='Hispanic_Perc', hover_name='Location',
                         scope='usa', labels={"Hispanic_Perc": "Hispanic Percentage"})
 
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
