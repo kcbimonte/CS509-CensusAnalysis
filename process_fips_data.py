@@ -7,7 +7,6 @@ from pymongo import MongoClient
 file_fips = "Census_Data/FIPS_ST_COU_Area-Name"
 
 
-
 def read_file():
     data = []
 
@@ -45,5 +44,5 @@ def upload_to_mongo():
 
 
 if __name__ == '__main__':
-    read_file()
+    # read_file()
     upload_to_mongo()

@@ -40,7 +40,6 @@ ohio_path = dir_path + "/Ohio/oh2010.ur1"
 oklahoma_path = dir_path + "/Oklahoma/ok2010.ur1"
 oregon_path = dir_path + "/Oregon/or2010.ur1"
 pennsylvania_path = dir_path + "/Pennsylvania/pa2010.ur1"
-puerto_rico_path = dir_path + "/Puerto_Rico/pr2010.ur1"
 rhode_island_path = dir_path + "/Rhode_Island/ri2010.ur1"
 south_carolina_path = dir_path + "/South_Carolina/sc2010.ur1"
 south_dakota_path = dir_path + "/South_Dakota/sd2010.ur1"
@@ -63,7 +62,7 @@ location_paths = [alabama_path, alaska_path, arizona_path, arkansas_path,
                   montana_path, nebraska_path, nevada_path, new_hampshire_path,
                   new_jersey_path, new_mexico_path, new_york_path, north_carolina_path,
                   north_dakota_path, ohio_path, oklahoma_path, oregon_path,
-                  pennsylvania_path, puerto_rico_path, rhode_island_path,
+                  pennsylvania_path, rhode_island_path,
                   south_carolina_path, south_dakota_path, tennessee_path, texas_path,
                   utah_path, vermont_path, virginia_path, washington_path,
                   west_virginia_path, wisconsin_path, wyoming_path]
