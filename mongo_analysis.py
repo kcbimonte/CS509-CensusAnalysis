@@ -1,26 +1,40 @@
 import json
+import os
 
 import pandas as pd
 from pymongo import MongoClient
+from os import path
 
 import mongo_info as dbinfo
 import plotly.express as px
 
 
 def percentage_hispanic():
-    myclient = MongoClient(dbinfo.mongourl, username=dbinfo.username, password=dbinfo.password)
-    db = myclient["census"]
+    if not path.exists("Census_Analysis/hispanic_perc.json"):
+        myclient = MongoClient(dbinfo.mongourl, username=dbinfo.username, password=dbinfo.password)
+        db = myclient["census"]
 
-    state_name = "Florida"
+        state_name = "Alabama"
+        result = _percentage_hispanic_helper(db, state_name)
+        df = pd.DataFrame(list(result))
+        print("Added", state_name)
 
-    result = _percentage_hispanic_helper(db, state_name)
+        for filename in os.listdir("State_JSONs"):
+            state_name = filename.split(".")[0]
+            if state_name != "Alabama":
+                result = _percentage_hispanic_helper(db, state_name)
+                temp_df = pd.DataFrame(list(result))
+                df = df.append(temp_df, ignore_index=True)
+                print("Added", state_name)
 
-    df = pd.DataFrame(list(result))
+        with open("Census_Analysis/hispanic_perc.json", 'w') as file:
+            df.to_json(file, orient='records')
+    else:
+        with open("Census_Analysis/hispanic_perc.json", 'r') as file:
+            df = pd.read_json(file, orient='records', dtype=False)
 
     with open("Census_Data/geojson-counties-fips.json", 'r') as fh:
         counties = json.load(fh)
-
-    print(df)
 
     fig = px.choropleth(df, geojson=counties, locations='fips', color='Hispanic_Perc',
                         scope='usa', labels={"Hispanic_Perc": "Hispanic Percentage"})
@@ -34,29 +48,7 @@ def _percentage_hispanic_helper(db, state_name):
         {"$match": {"$and": [{"state-co": {"$ne": "12   "}}, {"COUNTY": {"$ne": None}}]}},
         {
             "$group": {
-                "_id": {
-                    "$concat": [
-                        {"$toString": "$STATE"},
-                        {
-                            "$cond": [
-                                {"$and": [{"$lte": ["$COUNTY", 99]}, {"$gt": ["$COUNTY", 9]}]},
-                                {
-                                    "$concat": ["0", {"$toString": "$COUNTY"}]
-                                },
-                                {
-                                    "$cond": [
-                                        {"$and": [{"$lte": ["$COUNTY", 9]}, {"$gt": ["$COUNTY", 0]}]},
-                                        {
-                                            "$concat": ["00", {"$toString": "$COUNTY"}]
-                                        },
-                                        {"$toString": "$COUNTY"}
-                                    ]
-                                }
-                            ]
-                        }
-
-                    ]
-                },
+                "_id": _fix_fips_helper(),
                 "Total_Pop": {"$sum": "$Total_Pop"},
                 "Total_Hisp": {"$sum": "$Total_Hispanic_Yes"}
             }
@@ -69,6 +61,40 @@ def _percentage_hispanic_helper(db, state_name):
             }
         }
     ])
+
+
+def _fix_fips_helper():
+    return {
+        "$concat": [
+            {
+                "$cond": [
+                    {"$and": [{"$lte": ["$STATE", 9]}, {"$gt": ["$STATE", 0]}]},
+                    {
+                        "$concat": ["0", {"$toString": "$STATE"}]
+                    },
+                    {"$toString": "$STATE"}
+                ]
+            },
+            {
+                "$cond": [
+                    {"$and": [{"$lte": ["$COUNTY", 99]}, {"$gt": ["$COUNTY", 9]}]},
+                    {
+                        "$concat": ["0", {"$toString": "$COUNTY"}]
+                    },
+                    {
+                        "$cond": [
+                            {"$and": [{"$lte": ["$COUNTY", 9]}, {"$gt": ["$COUNTY", 0]}]},
+                            {
+                                "$concat": ["00", {"$toString": "$COUNTY"}]
+                            },
+                            {"$toString": "$COUNTY"}
+                        ]
+                    }
+                ]
+            }
+
+        ]
+    }
 
 
 if __name__ == '__main__':

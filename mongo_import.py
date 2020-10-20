@@ -25,7 +25,10 @@ def single_run(state_file="Alabama.json"):
 
 def multi_run():
     for filename in os.listdir("State_JSONs"):
+        state_name = filename.split(".")[0]
+        print("Uploading " + state_name)
         single_run(filename)
+        print(state_name + " Uploaded")
 
 
 if __name__ == '__main__':
