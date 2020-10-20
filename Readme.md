@@ -12,11 +12,13 @@ The following is a list of resources needed in order to perform the included ana
 - Header Definitions for Summary File (Can be decoded from SAS File) - [Link to File](https://www2.census.gov/census_2010/01-Redistricting_File--PL_94-171/pl_geohd_2010.sas)
 - 2010 Census Summary File 01 Technical Documentation - [Link to File](https://www.census.gov/prod/cen2010/doc/sf1.pdf)
 - GeoJSON Counties FIPS File - [Link to File](https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json)
+- State FIPS Code to State Name Data - (Copy and Paste the state-level FIPS Code and Place Names) [Link to File](https://transition.fcc.gov/oet/info/maps/census/fips/fips.txt#:~:text=FIPS%20codes%20are%20numbers%20which,to%20which%20the%20county%20belongs.)
 
 ## Dependencies
 The following is a list of dependencies to process and analyze the dataset:
 
 - pandas
+- plotly
 - pymongo
 
 ## Setup
@@ -25,6 +27,7 @@ The following needs to be done before any code is ran:
 1. The urban dataset needs to be in a folder called Census_Data.
     - Each folder will have a path structure like the following: Census_Data/Alabama
 2. Save the GeoJSON Counties FIPS file to Census_Data/geojson-counties-fips.json
+3. Create a file called Census_Data/state_fips.csv and copy the State FIPS Code to State Name dataset into it. Replace the spaces in-between code and name with a comma. Also remove leading white spaces. 
 3. The Header Definitions SAS file should be stored as a text file named Census_Data/GeoHeaders.txt
     - It should have the following structure: @1 FILEID $6. /\*File Identification*/
     - This will ensure that the geo file in each location folder is read in properly
@@ -40,6 +43,7 @@ The code needs to be ran in the following order. If your data is already in Mong
 5. Then run auto_run.py. This will convert the first three state files into one JSON file for each state. This will take some time to do.
 6. Next run the mongo_import.py which will import the JSON data into the Mongo database. This will take some time.
 7. Finally run mongo_analysis.py which will run the given analyses. 
+    1. Note: Each analysis will output a dataset file to the Census Analysis folder to use for subsequent rerun instead of querying MongoDB
 
 ## Credits
 Created by Kevin Bimonte
