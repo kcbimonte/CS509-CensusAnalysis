@@ -1,33 +1,20 @@
 import pandas as pd
 import analysis.helper.helper_functions as h
 
-from os import path
-
-file_path = '../Census_Analysis/Race/diversity_index.json'
-
 
 def racial_diversity():
-    if not path.exists(file_path):
-        df = _prepare_dataframe()
+    df = _prepare_dataframe()
 
-        df = _calculate_diversity_index(df)
+    df = _calculate_diversity_index(df)
 
-        print(df.head())
-
-        df['Text'] = '<br>Breakdowns by Percentages: ' \
-                     '<br>Asian: ' + df['Asian_Perc'].round(2).astype(str) + '%' + \
-                     '<br>Black: ' + df['Black_Perc'].round(2).astype(str) + '%' +\
-                     '<br>Indian or Alaskan Native: ' + df['Indian_Alaska_Perc'].round(2).astype(str) + '%' +\
-                     '<br>Other: ' + df['Other_Perc'].round(2).astype(str) + '%' +\
-                     '<br>Native Hawaiian and Other Pacific: ' + df['Pacific_Perc'].round(2).astype(str) + '%' +\
-                     '<br>White: ' + df['White_Perc'].round(2).astype(str) + '%' +\
-                     '<br>Two or More: ' + df['Two_More_Perc'].round(2).astype(str) + '%'
-
-        with open(file_path, 'w') as f:
-            df.to_json(f, orient='records')
-    else:
-        with open(file_path, 'r') as f:
-            df = pd.read_json(f, orient='records')
+    df['Text'] = '<br>Breakdowns by Percentages: ' \
+                 '<br>Asian: ' + df['Asian_Perc'].round(2).astype(str) + '%' + \
+                 '<br>Black: ' + df['Black_Perc'].round(2).astype(str) + '%' +\
+                 '<br>Indian or Alaskan Native: ' + df['Indian_Alaska_Perc'].round(2).astype(str) + '%' +\
+                 '<br>Other: ' + df['Other_Perc'].round(2).astype(str) + '%' +\
+                 '<br>Native Hawaiian and Other Pacific: ' + df['Pacific_Perc'].round(2).astype(str) + '%' +\
+                 '<br>White: ' + df['White_Perc'].round(2).astype(str) + '%' +\
+                 '<br>Two or More: ' + df['Two_More_Perc'].round(2).astype(str) + '%'
 
     helper = h.Helpers()
 
