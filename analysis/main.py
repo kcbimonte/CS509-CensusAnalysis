@@ -37,6 +37,10 @@ def _racial_diversity_analysis():
     ia.racial_diversity()
 
 
+def _invalid_analysis():
+    print("Invalid Analysis")
+
+
 if __name__ == '__main__':
     switch = {
         1: _hispanic_percentage_analysis,        # Analyzes the ratio of hispanics vs the total population
@@ -50,6 +54,6 @@ if __name__ == '__main__':
         'r': _racial_diversity_analysis          # Calculates the Racial Diversity Index. Only runs properly when all racial files are created
     }
 
-    func = switch.get('r', lambda: "Invalid analysis")
+    func = switch.get(8, lambda: _invalid_analysis())
     func()
 
