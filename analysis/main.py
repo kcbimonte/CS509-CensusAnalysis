@@ -46,8 +46,8 @@ if __name__ == '__main__':
         5: _pacific_percentage_analysis,         # Analyzes the ratio of pacific/native hawaiian vs the total population
         6: _other_percentage_analysis,           # Analyzes the ratio of other vs the total population
         7: _indian_alaskan_percentage_analysis,  # Analyzes the ratio of indian or native alaskan vs the total population
-        8: _two_more_percentage_analysis,        # Analyzes the ratio of two or more vs the total population. Only runs properly when all racial files are created
-        'r': _racial_diversity_analysis
+        8: _two_more_percentage_analysis,        # Analyzes the ratio of two or more vs the total population.
+        'r': _racial_diversity_analysis          # Calculates the Racial Diversity Index. Only runs properly when all racial files are created
     }
 
     func = switch.get('r', lambda: "Invalid analysis")
