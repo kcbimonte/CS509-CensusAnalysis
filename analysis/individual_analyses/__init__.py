@@ -1,13 +1,6 @@
 import analysis.individual_analyses.hispanic.hispanic_percentage as hp
-import analysis.individual_analyses.racial.black_percentage as bp
-import analysis.individual_analyses.racial.white_percentage as wp
-import analysis.individual_analyses.racial.asian_percentage as ap
-import analysis.individual_analyses.racial.pacific_percentage as pp
-import analysis.individual_analyses.racial.other_percentage as op
-import analysis.individual_analyses.racial.indian_alaskan_percentage as iap
-import analysis.individual_analyses.racial.two_or_more_percentage as tmp
-
 import analysis.individual_analyses.racial.racial_percentage as rp
+import analysis.individual_analyses.racial.racial_diversity as rd
 
 
 def black_percentage():
@@ -36,6 +29,10 @@ def indian_alaskan_percentage():
 
 def two_more_percentage():
     rp.percentage('two_more', 'Two_More_Perc', 'Two or More Percentage')
+
+
+def racial_diversity():
+    rd.racial_diversity()
 
 
 def hispanic_percentage():

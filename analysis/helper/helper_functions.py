@@ -55,12 +55,16 @@ class Helpers:
         return my_client["census"]
 
     @staticmethod
-    def plot(df, color, labels):
+    def plot(df, color, labels, hover_data=False):
         with open("../Census_Data/geojson-counties-fips.json", 'r') as fh:
             counties = json.load(fh)
 
-        fig = px.choropleth(df, geojson=counties, locations='fips', color=color, hover_name='Location',
-                            scope='usa', labels=labels)
+        if hover_data is False:
+            fig = px.choropleth(df, geojson=counties, locations='fips', color=color, hover_name='Location',
+                                scope='usa', labels=labels)
+        else:
+            fig = px.choropleth(df, geojson=counties, locations='fips', color=color, hover_name='Location',
+                                hover_data=['Text'], scope='usa', labels=labels)
 
         fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
         fig.show()

@@ -42,8 +42,21 @@ The code needs to be ran in the following order. If your data is already in Mong
 3. First ensure that a mongo database is created with the name census. Then ensure that the mongo_info.py file contains the correct connection information
 5. Then run auto_run.py. This will convert the first three state files into one JSON file for each state. This will take some time to do.
 6. Next run the mongo_import.py which will import the JSON data into the Mongo database. This will take some time.
-7. Finally run mongo_analysis.py which will run the given analyses. 
+7. Finally run analysis/main.py which will run the given analyses. 
     1. Note: Each analysis will output a dataset file to the Census Analysis folder to use for subsequent rerun instead of querying MongoDB
+    
+## Diversity Index
+Diversity Index (DI) captures the racial and ethnic diversity of the country with a single number. 
+The DI expresses the probability that any two individuals chosen at random will have different racial or ethnic backgrounds. (Source: [Link](https://diversity.missouristate.edu/DiversityIndex.htm))
+
+The formulas are as follows:
+
+1. Two individuals with the same racial identity:
+    - `Pr(same race) = Pr(Asian)^2 + Pr(Black)^2 + Pr(Indian/Alaskan)^2 + Pr(Other)^2 + Pr(Hawaiian/Pacific)^2 + Pr(Two or More)^2 + Pr(White)^2`
+2. Two individuals with different racial identities:
+    - `Pr(different race) = 1-Pr(same race)`
+    
+In the Racial Diversity Calculation, we use the second equation.
 
 ## Credits
 Created by Kevin Bimonte
