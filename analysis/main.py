@@ -1,4 +1,5 @@
 import analysis.individual_analyses as ia
+import analysis.individual_analyses.hispanic.race as hr
 
 
 def _hispanic_percentage_analysis():
@@ -37,23 +38,37 @@ def _racial_diversity_analysis():
     ia.racial_diversity()
 
 
-def _invalid_analysis():
-    print("Invalid Analysis")
+def _black_hispanic_percentage_analysis():
+    hr.hispanic_black_percentage()
+
+
+def _white_hispanic_percentage_analysis():
+    hr.hispanic_white_percentage()
+
+
+def _asian_hispanic_percentage_analysis():
+    hr.hispanic_asian_percentage()
+
+
+def _pacific_hispanic_percentage_analysis():
+    hr.hispanic_pacific_percentage()
+
+
+def _other_hispanic_percentage_analysis():
+    hr.hispanic_other_percentage()
+
+
+def _indian_alaskan_hispanic_percentage_analysis():
+    hr.hispanic_indian_alaskan_percentage()
+
+
+def _two_more_hispanic_percentage_analysis():
+    hr.hispanic_two_more_percentage()
+
+
+def _racial_hispanic_diversity():
+    hr.racial_hispanic_diversity()
 
 
 if __name__ == '__main__':
-    switch = {
-        1: _hispanic_percentage_analysis,        # Analyzes the ratio of hispanics vs the total population
-        2: _black_percentage_analysis,           # Analyzes the ratio of blacks vs the total population
-        3: _white_percentage_analysis,           # Analyzes the ratio of white vs the total population
-        4: _asian_percentage_analysis,           # Analyzes the ratio of asian vs the total population
-        5: _pacific_percentage_analysis,         # Analyzes the ratio of pacific/native hawaiian vs the total population
-        6: _other_percentage_analysis,           # Analyzes the ratio of other vs the total population
-        7: _indian_alaskan_percentage_analysis,  # Analyzes the ratio of indian or native alaskan vs the total population
-        8: _two_more_percentage_analysis,        # Analyzes the ratio of two or more vs the total population.
-        'r': _racial_diversity_analysis          # Calculates the Racial Diversity Index. Only runs properly when all racial files are created
-    }
-
-    func = switch.get(8, lambda: _invalid_analysis())
-    func()
-
+    _racial_hispanic_diversity()
