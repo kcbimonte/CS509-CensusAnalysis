@@ -42,7 +42,15 @@ def percentage(passed_name, field_name, field_descriptor):
     labels = {field_name: field_descriptor}
     color = field_name
 
-    helper.plot(df, color, labels)
+    fig = helper.plot(df, color, labels)
+
+    file_path = "../web_json/race/" + passed_name + "_percentages.json"
+
+    if not path.exists(file_path):
+        import plotly.io as pio
+        pio.write_json(fig, file=file_path)
+    else:
+        print("Plot already written")
 
 
 def _percentage_helper(db, helper, state_name, name):

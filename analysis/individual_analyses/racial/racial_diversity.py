@@ -1,5 +1,6 @@
 import pandas as pd
 import analysis.helper.helper_functions as h
+from os import path
 
 
 def racial_diversity():
@@ -21,7 +22,15 @@ def racial_diversity():
     labels = {"Diversity Index": "Diversity Index (See Readme)"}
     color = 'Diversity Index'
 
-    helper.plot(df, color, labels, hover_data=True)
+    fig = helper.plot(df, color, labels)
+
+    file_path = "../web_json/diversity/racial_diversity.json"
+
+    if not path.exists(file_path):
+        import plotly.io as pio
+        pio.write_json(fig, file=file_path)
+    else:
+        print("Plot already written")
 
 
 def _prepare_dataframe():

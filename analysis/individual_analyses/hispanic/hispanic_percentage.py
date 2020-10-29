@@ -38,7 +38,15 @@ def percentage_hispanic():
     color = 'Hispanic_Perc'
     labels = {"Hispanic_Perc": "Hispanic Percentage"}
 
-    helper.plot(df, color, labels)
+    fig = helper.plot(df, color, labels)
+
+    file_path = "../web_json/hispanic_percentages.json"
+
+    if not path.exists(file_path):
+        import plotly.io as pio
+        pio.write_json(fig, file=file_path)
+    else:
+        print("Plot already written")
 
 
 def _percentage_hispanic_helper(db, helper, state_name):

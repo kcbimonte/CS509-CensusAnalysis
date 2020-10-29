@@ -39,9 +39,13 @@ def racial_diversity():
 
     fig = helper.plot(df, color, labels, hover_data=True)
 
-    import plotly.io as pio
-    # pio.write_html(fig, file='../web_json/hispanic_racial_diversity.web_json', auto_open=True)
-    pio.write_json(fig, file='../web_json/hispanic_racial_diversity.json')
+    file_path = "../web_json/diversity/hispanic_racial_diversity.json"
+
+    if not path.exists(file_path):
+        import plotly.io as pio
+        pio.write_json(fig, file=file_path)
+    else:
+        print("Plot already written")
 
 
 def _prepare_dataframe():
