@@ -37,13 +37,13 @@ def percentage(passed_name, field_name, field_descriptor):
             df.to_json(file, orient='records')
     else:
         print(passed_name + "Exists")
-        # with open(full_path, 'r') as file:
-        #     df = pd.read_json(file, orient='records', dtype=False)
+        with open(full_path, 'r') as file:
+            df = pd.read_json(file, orient='records', dtype=False)
 
-    # labels = {field_name: field_descriptor}
-    # color = field_name
-    #
-    # helper.plot(df, color, labels)
+    labels = {field_name: field_descriptor}
+    color = field_name
+
+    helper.plot(df, color, labels)
 
 
 def _percentage_helper(db, helper, state_name, name):

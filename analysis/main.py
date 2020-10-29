@@ -71,12 +71,13 @@ def _racial_hispanic_diversity():
 
 
 if __name__ == '__main__':
-    _black_hispanic_percentage_analysis()
-    _white_hispanic_percentage_analysis()
-    _asian_hispanic_percentage_analysis()
-    _pacific_hispanic_percentage_analysis()
-    _other_hispanic_percentage_analysis()
-    _indian_alaskan_hispanic_percentage_analysis()
-    _two_more_hispanic_percentage_analysis()
+    # _black_hispanic_percentage_analysis()
+    # _white_hispanic_percentage_analysis()
+    # _asian_hispanic_percentage_analysis()
+    # _pacific_hispanic_percentage_analysis()
+    # _other_hispanic_percentage_analysis()
+    # _indian_alaskan_hispanic_percentage_analysis()
+    # _two_more_hispanic_percentage_analysis()
 
-    # _racial_hispanic_diversity()
+    _racial_hispanic_diversity()
+    # _racial_diversity_analysis()
